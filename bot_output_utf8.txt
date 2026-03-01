@@ -1,0 +1,99 @@
+[AnalyticsLogger] Initializing stable JSON logger at: C:\Users\malon\Web3 Development\bots\maggie\bot\logs\execution_analytics.json
+
+╔══════════════════════════════════════════════════════════════╗
+║                  🧲 MAGGIE MEV BOT 🧲                          ║
+║            Flashloan Arbitrage on Base Mainnet                ║
+╠══════════════════════════════════════════════════════════════╣
+║ Mode: 🔍 DRY-RUN (Simulation Only)           ║
+║ Network: Base Mainnet                              ║
+║ Min Profit: $0.5                                        ║
+║ Max Slippage: 0.5%                                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+
+[ForkSimulator] Checking for existing Anvil instance on port 8546...
+[ForkSimulator] ✅ Connected to existing Anvil fork!
+🚀 Starting monitoring...
+
+
+🔄 Cycle #1 - 2026-03-01T16:43:15.676Z
+────────────────────────────────────────────────────────────
+
+📊 Monitoring 0x42000000.../0x833589fC...
+  🔍 Found pool for Uniswap V3: 0xb4CB800910B228ED3d0834cF79D697127BBB00e5 (Fee: 100)
+  🔍 Found pool for Uniswap V3: 0xd0b53D9277642d899DF5C87A3966A349A798F224 (Fee: 500)
+  🔍 Found pool for Uniswap V3: 0x6c561B446416E1A00E8E93E221854d6eA4171372 (Fee: 3000)
+  🔍 Found pool for Uniswap V3: 0x0b1C2DCbBfA744ebD3fC17fF1A96A1E1Eb4B2d69 (Fee: 10000)
+  🔍 Found pool for SushiSwap V3: 0x482Fe995c4a52bc79271aB29A53591363Ee30a89 (Fee: 100)
+  🔍 Found pool for SushiSwap V3: 0x57713F7716e0b0F65ec116912F834E49805480d2 (Fee: 500)
+  🔍 Found pool for SushiSwap V3: 0x41595326AaBe6132FC6C7aE71Af087A3A9DBC9F6 (Fee: 3000)
+  🔍 Found pool for SushiSwap V3: 0x6fa08690355261b5360b2302bbF78f63e2B014f5 (Fee: 10000)
+  🔍 Found pool for PancakeSwap V3: 0x72AB388E2E2F6FaceF59E3C3FA2C4E29011c2D38 (Fee: 100)
+  🔍 Found pool for PancakeSwap V3: 0xB775272E537cc670C65DC852908aD47015244EaF (Fee: 500)
+  🔍 Found pool for PancakeSwap V3: 0x118EFEF7DB0712F03E067122b8F89E7a4B79262f (Fee: 10000)
+  🔍 Found pool for Alien Base V3: 0xD75a097C33F88E62EF9554682701eCAFB3915F52 (Fee: 3000)
+  🔍 Found pool for Alien Base V3: 0x71E58838077F85Da160d916CA3a523b06A6B3360 (Fee: 10000)
+  🔍 Found pool for SwapBased V2: 0xaEeB835f3Aa21d19ea5E33772DaA9E64f1b6982F (Fee: 500)
+  🔍 Found pool for BaseSwap V2: 0xab067c01C7F5734da168C699Ae9d23a4512c9FdB (Fee: 500)
+Found 13 price sources:
+  Uniswap V3 (0.01%): 2001.27972712 | Liq: 418209717872110...
+  Uniswap V3 (0.05%): 2001.66094491 | Liq: 124518410790062...
+  Uniswap V3 (0.30%): 2003.38593621 | Liq: 150309632308586...
+  Uniswap V3 (1.00%): 2005.05666700 | Liq: 180035060787911...
+  SushiSwap V3 (0.01%): 2001.31969339 | Liq: 15689805194228...
+  SushiSwap V3 (0.05%): 2002.00095471 | Liq: 139037731342709...
+  SushiSwap V3 (0.30%): 2003.67125842 | Liq: 493179117985023...
+  SushiSwap V3 (1.00%): 2003.96608401 | Liq: 372144963771...
+  PancakeSwap V3 (0.01%): 2001.16326741 | Liq: 109494005983794...
+  PancakeSwap V3 (0.05%): 2001.66629954 | Liq: 427850857007891...
+  PancakeSwap V3 (1.00%): 2015.44115357 | Liq: 11717367783635...
+  SwapBased V2 (0.30%): 1999.98888498 | Liq: 26218130283228...
+  BaseSwap V2 (0.30%): 2002.67176392 | Liq: 244010328355747...
+  No profitable opportunities found.
+
+📊 Monitoring 0x42000000.../0xfde4C96c...
+  🔍 Found pool for Uniswap V3: 0xD0d182Fed9d119E1E41f5199266974F2546eB3F5 (Fee: 100)
+  🔍 Found pool for Uniswap V3: 0xd92E0767473D1E3FF11Ac036f2b1DB90aD0aE55F (Fee: 500)
+  🔍 Found pool for Uniswap V3: 0xcE1d8c90A5F0ef28fe0F457e5Ad615215899319a (Fee: 3000)
+  🔍 Found pool for Uniswap V3: 0x05E5995E09A4494fdc1Ede4c1Eb02221898bDD48 (Fee: 10000)
+  🔍 Found pool for SushiSwap V3: 0x6410F39BB82730394a546a3cE060797E69f71CA7 (Fee: 100)
+  🔍 Found pool for SushiSwap V3: 0xdc15cb9F03442559BCd21020ACD2717b4Bc7c7bF (Fee: 3000)
+  🔍 Found pool for PancakeSwap V3: 0x526d54cD4FAc2e6B2ddCb6bC98b9292603061f85 (Fee: 100)
+  🔍 Found pool for PancakeSwap V3: 0xEED856fC13455FDD285f7431e5F246CC1F00b51e (Fee: 500)
+  🔍 Found pool for PancakeSwap V3: 0x2d08491a464f66E3BD2C729E7496fBeb68EF5bE0 (Fee: 10000)
+  🔍 Found pool for BaseSwap V2: 0xe8E3eD2001E08eA12753C227CA62f69EAe2eeA11 (Fee: 500)
+Found 6 price sources:
+  Uniswap V3 (0.05%): 2002.58203503 | Liq: 490484076533383...
+  Uniswap V3 (0.30%): 2002.55678006 | Liq: 138235135379900...
+  SushiSwap V3 (0.30%): 2006.98014003 | Liq: 1058830561737...
+  PancakeSwap V3 (0.01%): 2001.91895289 | Liq: 236827218979928...
+  PancakeSwap V3 (0.05%): 1992.64769862 | Liq: 17334243709...
+  BaseSwap V2 (0.30%): 2004.90940425 | Liq: 995415719778...
+
+🎯 Found 5 potential opportunities:
+
+  [1] PancakeSwap V3 → PancakeSwap V3
+      Buy @ 1992.64769862 (0.05%)
+      Sell @ 2001.91895289 (0.01%)
+      Gross Profit: 0.4042%
+
+  [2] PancakeSwap V3 → Uniswap V3
+      Buy @ 1992.64769862 (0.05%)
+      Sell @ 2002.58203503 (0.05%)
+      Gross Profit: 0.3973%
+
+  [3] PancakeSwap V3 → SushiSwap V3
+      Buy @ 1992.64769862 (0.05%)
+      Sell @ 2006.98014003 (0.3%)
+      Gross Profit: 0.3667%
+
+📊 Monitoring 0x833589fC.../0xfde4C96c...
+  🔍 Found pool for Uniswap V3: 0xD56da2B74bA826f19015E6B7Dd9Dae1903E85DA1 (Fee: 100)
+  🔍 Found pool for Uniswap V3: 0xB7F084c7f7f1c680d08780e2b2ef4F2133DB0Df8 (Fee: 500)
+  🔍 Found pool for Uniswap V3: 0x82ccD0de0293CCBD2184901a69fdc2dd8073320E (Fee: 3000)
+  🔍 Found pool for Uniswap V3: 0x5d165468c8a6Cf3D50702850ed29bEcB9aC9Ca4d (Fee: 10000)
+  🔍 Found pool for SushiSwap V3: 0xfeAf8296CE905884a528DA784A52964d9F614F00 (Fee: 100)
+  🔍 Found pool for SushiSwap V3: 0x6e6801fF05880f96448d06C50792667fa3f58030 (Fee: 500)
+  🔍 Found pool for PancakeSwap V3: 0x5f07bb9fEE6062e9D09A52E6d587c64bAD6bA706 (Fee: 100)
+  🔍 Found pool for PancakeSwap V3: 0x2dB0FFf9f1aFcEf3A77e673DfBA9883C036ebD53 (Fee: 500)
+  🔍 Found pool for PancakeSwap V3: 0x0BFFF3A8f90FBdd39a5dDD1eE9eb2F9a11E79b86 (Fee: 10000)

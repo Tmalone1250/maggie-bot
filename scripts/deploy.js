@@ -69,10 +69,18 @@ async function main() {
     CONFIG.minProfitBps
   );
 
-  await executor.waitForDeployment();
+  console.log(`⏳ Waiting for deployment transaction to be mined...`);
+  const deploymentReceipt = await executor.deploymentTransaction().wait(2); // Wait 2 blocks for finality
   const executorAddress = await executor.getAddress();
 
+  if (deploymentReceipt.status === 0) {
+    console.error('❌ ERROR: Deployment transaction reverted on-chain!');
+    process.exit(1);
+  }
+
   console.log(`\n✅ FlashloanExecutor deployed at: ${executorAddress}`);
+  console.log(`   Block Number: ${deploymentReceipt.blockNumber}`);
+  console.log(`   Gas Used: ${deploymentReceipt.gasUsed}`);
 
   // Verify deployment
   console.log('\n🔍 Verifying deployment...');

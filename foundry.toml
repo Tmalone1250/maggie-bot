@@ -7,6 +7,12 @@ optimizer = true
 optimizer_runs = 200
 via_ir = false
 
+remappings = [
+    "@aave/=lib/aave-v3-core/",
+    "@uniswap/=lib/v3-periphery/",
+    "@openzeppelin/=lib/openzeppelin-contracts/"
+]
+
 [profile.default.fuzz]
 runs = 256
 
@@ -16,10 +22,3 @@ base_fork = "http://127.0.0.1:8545"
 
 [etherscan]
 base = { key = "${BASESCAN_API_KEY}", url = "https://api.basescan.org/api" }
-
-# Remappings for dependencies
-remappings = [
-    "@aave/=lib/aave-v3-core/",
-    "@uniswap/=lib/v3-periphery/",
-    "@openzeppelin/=lib/openzeppelin-contracts/"
-]

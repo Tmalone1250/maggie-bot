@@ -10,7 +10,38 @@ const {
 
 // ABI for encoding FlashloanExecutor parameters
 const EXECUTOR_ABI = [
-  'function executeWithAave((address flashloanProvider, address borrowToken, uint256 borrowAmount, uint256 minProfit, (address router, address tokenIn, address tokenOut, uint24 fee, uint256 amountIn, uint256 minAmountOut)[] swaps) params)',
+  {
+    name: 'executeWithAave',
+    type: 'function',
+    stateMutability: 'nonpayable',
+    inputs: [
+      {
+        name: 'params',
+        type: 'tuple',
+        components: [
+          { name: 'flashloanProvider', type: 'address' },
+          { name: 'borrowToken', type: 'address' },
+          { name: 'borrowAmount', type: 'uint256' },
+          { name: 'minProfit', type: 'uint256' },
+          { name: 'routeHash', type: 'bytes32' },
+          {
+            name: 'swaps',
+            type: 'tuple[]',
+            components: [
+              { name: 'protocol', type: 'uint8' },
+              { name: 'router', type: 'address' },
+              { name: 'tokenIn', type: 'address' },
+              { name: 'tokenOut', type: 'address' },
+              { name: 'fee', type: 'uint24' },
+              { name: 'amountIn', type: 'uint256' },
+              { name: 'minAmountOut', type: 'uint256' }
+            ]
+          }
+        ]
+      }
+    ],
+    outputs: []
+  }
 ];
 
 /**
@@ -29,11 +60,15 @@ class CalldataEncoder {
    * @returns {Object} Swap instruction
    */
   createSwapInstruction(options) {
+    let routerFallback = UNISWAP_V3_ROUTER; // V3 uses UniversalRouter
+    // Note: V2 and Maverick pass their Pool/Factory addresses down via options.pool from PriceMonitor opportunities.
+    
     return {
-      router: options.router || UNISWAP_V3_ROUTER,
+      protocol: options.protocol || 0, // 0 = V3 enum
+      router: options.pool ? options.pool : routerFallback, // For Maverick and V2, the execution requires the Pool/Pair address directly
       tokenIn: options.tokenIn,
       tokenOut: options.tokenOut,
-      fee: options.fee,
+      fee: options.fee || 3000,
       amountIn: options.amountIn || '0', // 0 = use full balance
       minAmountOut: options.minAmountOut || '1', // Minimum 1 wei
     };
@@ -62,7 +97,8 @@ class CalldataEncoder {
     const swaps = [
       // First swap: Buy pool - swap borrowed token for intermediate
       this.createSwapInstruction({
-        router: UNISWAP_V3_ROUTER,
+        protocol: opportunity.buyProtocol,
+        pool: opportunity.buyPool,
         tokenIn: opportunity.token0,
         tokenOut: opportunity.token1,
         fee: opportunity.buyFee,
@@ -71,7 +107,8 @@ class CalldataEncoder {
       }),
       // Second swap: Sell pool - swap intermediate back to borrowed token
       this.createSwapInstruction({
-        router: UNISWAP_V3_ROUTER,
+        protocol: opportunity.sellProtocol,
+        pool: opportunity.sellPool,
         tokenIn: opportunity.token1,
         tokenOut: opportunity.token0,
         fee: opportunity.sellFee,
@@ -80,11 +117,30 @@ class CalldataEncoder {
       }),
     ];
 
+    // Compute route hash for integrity verification
+    const abiCoder = new ethers.AbiCoder();
+    const encodedRoute = abiCoder.encode(
+      [
+        'address',
+        'uint256',
+        'uint256',
+        'tuple(uint8 protocol, address router, address tokenIn, address tokenOut, uint24 fee, uint256 amountIn, uint256 minAmountOut)[]'
+      ],
+      [
+        borrowToken,
+        borrowAmount,
+        minProfit,
+        swaps.map(s => [s.protocol, s.router, s.tokenIn, s.tokenOut, s.fee, s.amountIn, s.minAmountOut])
+      ]
+    );
+    const routeHash = ethers.keccak256(encodedRoute);
+
     return {
       flashloanProvider: this.executorAddress, // Will be replaced with Aave pool
       borrowToken,
       borrowAmount,
       minProfit,
+      routeHash,
       swaps,
     };
   }
@@ -97,6 +153,7 @@ class CalldataEncoder {
   encodeExecuteWithAave(params) {
     // Format swaps for ABI encoding
     const formattedSwaps = params.swaps.map(swap => [
+      swap.protocol,
       swap.router,
       swap.tokenIn,
       swap.tokenOut,
@@ -110,6 +167,7 @@ class CalldataEncoder {
       borrowToken: params.borrowToken,
       borrowAmount: params.borrowAmount,
       minProfit: params.minProfit,
+      routeHash: params.routeHash,
       swaps: formattedSwaps,
     }]);
 

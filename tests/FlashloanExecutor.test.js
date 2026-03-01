@@ -127,7 +127,9 @@ describe('FlashloanExecutor', function () {
         borrowToken: WETH,
         borrowAmount: 0,
         minProfit: 0,
+        routeHash: ethers.ZeroHash,
         swaps: [{
+          protocol: 0,
           router: WETH,
           tokenIn: WETH,
           tokenOut: USDC,
@@ -148,6 +150,7 @@ describe('FlashloanExecutor', function () {
         borrowToken: WETH,
         borrowAmount: ethers.parseEther('1'),
         minProfit: 0,
+        routeHash: ethers.ZeroHash,
         swaps: [],
       };
 
@@ -164,7 +167,9 @@ describe('FlashloanExecutor', function () {
         borrowToken: WETH,
         borrowAmount: ethers.parseEther('1'),
         minProfit: 0,
+        routeHash: ethers.ZeroHash,
         swaps: [{
+          protocol: 0,
           router: WETH,
           tokenIn: WETH,
           tokenOut: USDC,
@@ -185,7 +190,9 @@ describe('FlashloanExecutor', function () {
         borrowToken: WETH,
         borrowAmount: ethers.parseEther('1'),
         minProfit: 0,
+        routeHash: ethers.ZeroHash,
         swaps: [{
+          protocol: 0,
           router: WETH,
           tokenIn: WETH,
           tokenOut: USDC,

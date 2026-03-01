@@ -6,12 +6,14 @@
   "scripts": {
     "start": "node bot/index.js",
     "simulate": "node scripts/simulate.js",
+    "simulate:profit": "npx hardhat run scripts/simulate_profit.js --network hardhat",
     "test": "npx hardhat test",
     "test:fork": "npx hardhat test --network hardhat",
     "lint": "solhint 'contracts/**/*.sol'",
     "anvil": "node scripts/anvil.js"
   },
   "dependencies": {
+    "better-sqlite3": "^12.6.2",
     "dotenv": "^16.3.1",
     "viem": "^2.0.0"
   },
